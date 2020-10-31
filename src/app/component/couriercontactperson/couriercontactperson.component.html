@@ -1,0 +1,41 @@
+<div class="row">
+    <h4 class="dispaly-4"><i class="fa fa-plus"></i> Add Contact Person</h4>
+ 
+ 
+  </div>
+  <hr>
+<form class="example-container" [formGroup]="contactPersonForm" (submit)="onSubmit()" >
+<p>
+  <mat-form-field>
+    <mat-label>Person Name</mat-label>
+    <input matInput type="text"  formControlName="personName" >
+   
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Phone-1</mat-label>
+    <input matInput type="text"  formControlName="phone1" (keypress)="keyPress1($event)" minlength=11 maxlength=11>
+   
+
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field>
+    <mat-label>Phone-2</mat-label>
+    <input matInput type="text"  formControlName="phone2" (keypress)="keyPress2($event)" minlength=11 maxlength=11>
+   
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <select matNativeControl required formControlName="status">
+      <option value="Active">Active</option>
+      <option value="InActive">inActive</option>
+     
+    </select>
+  </mat-form-field>
+</p>
+<p>
+  <button mat-raised-button color="primary" [disabled]="contactPersonForm.invalid" style="margin: 10px;">Submit</button>
+
+  <button mat-stroked-button color="warn" [mat-dialog-close] ><i class="fa fa-close"></i> Close</button>
+</p>
+</form>

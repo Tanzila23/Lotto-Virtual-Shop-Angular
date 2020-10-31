@@ -1,0 +1,14 @@
+.example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+    width: 300px;
+  }
+  .example-container .mat-form-field {
+    margin-left: 8px;
+    width: 300px;
+  }
+  p{
+      text-align: center;
+  }
+  .cross{
+    margin-left: 430px;
+  }

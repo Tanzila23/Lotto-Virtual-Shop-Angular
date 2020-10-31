@@ -1,0 +1,226 @@
+
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="font-size: 20px;">
+          Article Details
+        </mat-panel-title>
+       
+      </mat-expansion-panel-header>
+      <form [formGroup]="articleForm" (submit)="onSubmit()">
+        <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile>
+            <div class="controls-contailer">
+              <mat-form-field>
+                <mat-label>Article Title</mat-label>
+                <input matInput type="text" formControlName="ArticleTitle" >
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Article Subtitle</mat-label>
+                <input matInput type="text" formControlName="ArticleSubTitle" >
+              </mat-form-field>
+             <mat-form-field>
+              <mat-label>Select Category</mat-label>
+              <mat-select formControlName="CategoryC_Id">
+                <mat-option *ngFor="let category of CategoryList" [value]="category.c_Id">
+                  {{category.description}}
+                </mat-option>
+              </mat-select>
+             </mat-form-field>
+             <mat-form-field>
+             <mat-label>Select Sub-Category</mat-label>
+             <mat-select formControlName="SubCategoryS_Id">
+               <mat-option *ngFor="let subcategory of SubCategoryList" [value]="subcategory.s_Id">
+                 {{subcategory.description}}
+               </mat-option>
+             </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Select Brand</mat-label>
+              <mat-select formControlName="Brand_Id">
+                <mat-option *ngFor="let brand of BrandList" [value]="brand.brand_Id">
+                  {{brand.brandName}}
+                </mat-option>
+              </mat-select>
+             </mat-form-field>
+            
+            </div>
+            
+          </mat-grid-tile>
+         
+       
+      
+          
+          
+          </mat-grid-list>
+          
+          <angular-editor [config]="config" formControlName="Description"></angular-editor>
+        <!-- order items table-->
+      
+      </form>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="font-size: 20px;">
+         Pricing
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+     
+      <form [formGroup]="articleForm" (submit)="onSubmit()">
+        <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile>
+            <div class="controls-contailer">
+              <mat-form-field>
+                <mat-label>Standard Price</mat-label>
+                <input matInput type="number" formControlName="StandardPrice" min="1">
+              </mat-form-field>
+              
+             <mat-form-field>
+              <mat-label>Franchise Price</mat-label>
+           
+                <input matInput type="number" formControlName="FranchisePrice" min="1" >
+              
+             </mat-form-field>
+             <mat-form-field>
+             <mat-label>Institute Price</mat-label>
+             <input matInput type="number" formControlName="InstitutePrice" min="1" >
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Whole Sale Price</mat-label>
+              <input matInput type="number" formControlName="WholeSalePrice" min="1" >
+             </mat-form-field>
+             <mat-form-field>
+              <mat-label>Dealer Price</mat-label>
+              <input matInput type="number" formControlName="DealerPrice" min="1" >
+             </mat-form-field>
+             <mat-form-field>
+              <mat-label>Other Price</mat-label>
+              <input matInput type="number" formControlName="OtherPrice" min="1" >
+             </mat-form-field>
+           
+            </div>
+          </mat-grid-tile>
+         
+          <mat-grid-tile>
+            <div class="controls-contailer">
+              <mat-form-field>
+                <mat-label>Select Vat Type</mat-label>
+                <mat-select formControlName="Vat_Id"> 
+                  <mat-option *ngFor="let vat of VatList" [value]="vat.vat_Id">
+                    {{vat.vatTypeName}}
+                  </mat-option>
+                </mat-select>
+               </mat-form-field>
+              
+             <mat-form-field>
+              <mat-label>Discount Price</mat-label>
+           
+                <input matInput type="number" formControlName="DiscontPrice" min="1" >
+              
+             </mat-form-field>
+             <mat-form-field>
+             <mat-label>Discount Rate</mat-label>
+             <input matInput type="number" formControlName="DiscountRate" min="1" >
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Purchase Cost</mat-label>
+              <input matInput type="number" formControlName="PurchaseCost" min="1" >
+             </mat-form-field>
+             <mat-form-field class="invisible">
+              <mat-label>Purchase Cost</mat-label>
+              <input matInput type="number" min="1" >
+             </mat-form-field>
+             <mat-form-field class="invisible">
+              <mat-label>Whole Sale Price</mat-label>
+              <input matInput type="number" min="1" >
+             </mat-form-field>
+           
+            </div>
+          </mat-grid-tile>
+          </mat-grid-list>
+        <!-- order items table-->
+       
+      </form>
+  
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="font-size: 20px;">
+         Article Variant
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      
+     
+      <table class="table table-borderless">
+        <thead class="thead-light">
+          <th>Article No</th>
+          <th>Color</th>
+          <th>Size</th>
+          <th>Gender</th>
+           
+          <th>
+            <a class="btn btn-sm btn-success text-white" (click)="AddOrEditAriticleVariant()"><i class="fa fa-plus"></i> Add Article Variant</a>
+          </th>
+        </thead>
+        <tbody>
+        
+    
+          <tr *ngFor="let item of service.ArticleVariantList;">
+            <td>{{item.ArticleNo}}</td>
+            <td>{{item.Size}}</td>
+            <td>{{item.Color}}</td>
+            <td>{{item.Gender}}</td>
+            
+            
+            <td>
+              <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem()"><i class="fa fa-pencil"></i></a>
+              <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem()"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    
+      
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="font-size: 20px;">
+         Article Image Variant
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+        
+      
+        <table class="table table-borderless">
+          <thead class="thead-light">
+            <th>Article Image</th>
+             
+            <th>
+              <a class="btn btn-sm btn-success text-white" (click)="AddOrEditImage()"><i class="fa fa-plus"></i> Add Article Image</a>
+            </th>
+          </thead>
+          <tbody>
+           <tr> 
+              <td *ngIf="" class="font-italic text-center" colspan="5">
+                No Image selected for this Article.
+              </td>
+            </tr>
+      
+            <tr *ngFor="let item of service.ArticleImageList;let i=index;">
+              <td>{{item.ImageName}}</td>
+              <td>
+                <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem()"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem()"><i class="fa fa-trash"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <form [formGroup]="articleForm" (submit)="onSubmit()">
+    <button mat-raised-button color="primary" style="margin-top: 10px;" [disabled]="articleForm.invalid">Submit</button>
+  </form>
+
+
+  
